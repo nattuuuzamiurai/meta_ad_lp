@@ -28,6 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "軽バンのレンタルが必要ですか？",
       options: ["必要", "不要"],
     },
+    {
+      id: 5,
+      text: "お名前を入力してください",
+      inputType: "text", // 名前入力を表示
+    },
+    {
+      id: 6,
+      text: "質問や要望があればご記入ください（任意）",
+      inputType: "textarea", // 質問・要望の自由記入
+    },
   ];
 
   let currentStep = 0; // 現在のステップ
@@ -42,13 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 最後の質問が終わったら
       container.innerHTML = `
         <h2>お問い合わせありがとうございます！</h2>
-        <p>以下の内容でお問い合わせを受け付けました:</p>
-        <ul>
-          ${Object.entries(answers)
-            .map(([key, value]) => `<li>${key}: ${value}</li>`)
-            .join("")}
-        </ul>
-        <button class="button" onclick="location.reload()">やり直す</button>
+        <p>近日中にお電話を差し上げますので、今しばらくお待ちください。</p>
       `;
       return;
     }
@@ -74,14 +78,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         container.appendChild(optionElement);
       });
-    } else if (question.inputType === "tel") {
-      // 電話番号入力フィールドをリッチなスタイルで表示
+    } else if (question.inputType) {
+      // 入力フィールド（リッチなスタイル）
       const inputContainer = document.createElement("div");
       inputContainer.className = "input-container";
 
-      const inputField = document.createElement("input");
-      inputField.type = "tel";
-      inputField.placeholder = "＊ハイフンなしで入力してください。";
+      const inputField = document.createElement(
+        question.inputType === "textarea" ? "textarea" : "input"
+      );
+      if (question.inputType === "textarea") {
+        inputField.rows = 4; // テキストエリアの行数
+      } else {
+        inputField.type = question.inputType;
+        inputField.placeholder =
+          question.inputType === "tel"
+            ? "＊ハイフンなしで入力してください。"
+            : "入力してください";
+      }
       inputField.className = "input-field";
 
       const submitButton = document.createElement("button");
@@ -89,11 +102,24 @@ document.addEventListener("DOMContentLoaded", () => {
       submitButton.className = "button";
 
       submitButton.addEventListener("click", () => {
-        if (inputField.value.trim() === "") {
-          alert("電話番号を入力してください。");
+        const value = inputField.value.trim();
+
+        // 必須チェック（質問や要望は空欄OK）
+        if (question.inputType !== "textarea" && value === "") {
+          alert(`${question.text}を入力してください。`);
           return;
         }
-        answers[question.text] = inputField.value; // 入力値を記録
+
+        // 電話番号の場合の桁数検証
+        if (question.inputType === "tel") {
+          const isValidPhoneNumber = /^\d{10,11}$/.test(value);
+          if (!isValidPhoneNumber) {
+            alert("電話番号は10桁または11桁の数字で入力してください。");
+            return;
+          }
+        }
+
+        answers[question.text] = value || "なし"; // 空の場合は「なし」と記録
         showQuestion(step + 1); // 次の質問へ
       });
 

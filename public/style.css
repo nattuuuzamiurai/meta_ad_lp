@@ -129,3 +129,17 @@ body {
   transform: scale(0.98);
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4); /* クリック時に濃い青影 */
 }
+textarea.input-field {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid rgba(0, 123, 255, 0.3); /* 青の枠線 */
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical;
+}
+textarea.input-field:focus {
+  border-color: rgba(0, 123, 255, 0.6); /* フォーカス時の濃い青 */
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
