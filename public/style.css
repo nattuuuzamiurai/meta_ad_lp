@@ -1,0 +1,84 @@
+/* ベーススタイル */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f9fc;
+  color: #333;
+}
+
+/* ヘッダー */
+.header {
+  background-color: #007bff; /* ヘッダーの青を復活 */
+  color: white;
+  text-align: center;
+  padding: 20px 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+.header p {
+  font-size: 1rem;
+  margin: 5px 0 0;
+  color: #d1e7ff; /* 薄い青でサブテキストを目立たせる */
+}
+
+/* フォームコンテナ */
+.form-container {
+  padding: 20px 15px;
+  max-width: 400px;
+  margin: 20px auto;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 質問セクション */
+#question-container {
+  text-align: center;
+}
+#question-container h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 選択肢（濃い青の影を強調） */
+.option {
+  display: block;
+  background: #ffffff;
+  color: #333; /* 文字は黒 */
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  margin: 15px 0;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 30, 90, 0.2), 0 2px 4px rgba(0, 30, 90, 0.4); /* 濃い青影 */
+  border: 2px solid rgba(0, 123, 255, 0.3); /* 青の枠線 */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+}
+.option:hover {
+  transform: translateY(-3px); /* ホバー時の軽い浮き上がり */
+  box-shadow: 0 8px 16px rgba(0, 30, 90, 0.4), 0 3px 6px rgba(0, 30, 90, 0.6); /* ホバー時の濃い青影 */
+  border: 2px solid rgba(0, 123, 255, 0.6); /* 青枠を強調 */
+}
+.option:active {
+  transform: scale(0.98); /* クリック時の縮小 */
+  box-shadow: 0 4px 8px rgba(0, 30, 90, 0.6); /* クリック時の濃い青影 */
+  border-color: rgba(0, 123, 255, 0.8); /* クリック時にさらに濃い青枠 */
+}
+
+/* フッター */
+.footer {
+  background-color: #f8f9fa;
+  color: #888;
+  text-align: center;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+}
